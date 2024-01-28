@@ -4,5 +4,24 @@
 </head>
 
 <body>
-  <div id="react-target"></div>
+  {{> Template.dynamic template=mainTemplate}}
 </body>
+
+<template name="mainTemplate">
+  {{#if currentUser}}
+    {{> dashboard}}
+  {{else}}
+    {{> login}}
+  {{/if}}
+</template>
+
+<template name="dashboard">
+  <!-- Based on the role, display the corresponding dashboard -->
+  {{#if isInRole 'admin'}}
+    {{> adminDashboard}}
+  {{else if isInRole 'borrower'}}
+    {{> borrowerDashboard}}
+  {{else if isInRole 'lender'}}
+    {{> lenderDashboard}}
+  {{/if}}
+</template>
